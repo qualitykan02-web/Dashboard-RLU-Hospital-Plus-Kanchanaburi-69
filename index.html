@@ -28,6 +28,7 @@ td.n,th.n{text-align:right}tr.tot td{font-weight:700;background:var(--hd)}
 .f{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px}
 select,.f button{font:500 14px inherit;font-family:inherit;padding:9px 12px;border-radius:10px;border:1px solid var(--bd);background:var(--card);color:var(--tx);max-width:100%}
 .f button{background:linear-gradient(90deg,#ff6a1a,#ec4899);color:#fff;border-color:transparent;font-weight:600;cursor:pointer}
+.stat{margin-top:10px;display:inline-block;background:rgba(255,255,255,.24);padding:3px 14px;border-radius:999px;font-size:13px;font-weight:600}
 footer{text-align:center;color:var(--mut);font-size:12px;padding-bottom:20px}
 .g2{display:grid;grid-template-columns:minmax(280px,5fr) minmax(340px,7fr);gap:28px;align-items:start}@media(max-width:760px){.g2{grid-template-columns:1fr}.va{height:240px!important}}.box h3{font-size:14px;margin:0 0 12px;color:var(--mut);font-weight:600}
 .va{position:relative;height:360px;display:flex;align-items:flex-end;gap:10px;margin-bottom:30px;border-bottom:1px solid var(--bd)}.vb{flex:1;height:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;position:relative}.vb i{width:62%;max-width:64px;border-radius:8px 8px 0 0;min-height:2px}.vb span{font-size:12px;font-weight:600;margin-bottom:2px}.vb em{position:absolute;top:100%;font-style:normal;font-size:12px;color:var(--mut);margin-top:5px;white-space:nowrap}
@@ -35,15 +36,15 @@ footer{text-align:center;color:var(--mut);font-size:12px;padding-bottom:20px}
 .hb{display:grid;grid-template-columns:minmax(110px,220px) 1fr 52px;gap:8px;align-items:center;font-size:13px;margin:4px 0}.nm{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.tr{position:relative;height:14px;background:var(--bd);border-radius:7px}.tr i{display:block;height:100%;border-radius:7px}.tr u{position:absolute;top:-3px;bottom:-3px;border-left:2px dashed #e5484d}.hb b{text-align:right}
 
 </style></head><body>
-<header><h1>Dashboard RLU Hospital Plus จังหวัดกาญจนบุรี</h1><p>การตรวจทางห้องปฏิบัติการอย่างสมเหตุผล · ปีงบประมาณ 2569</p></header>
+<header><h1>Dashboard RLU Hospital Plus จังหวัดกาญจนบุรี</h1><p>การตรวจทางห้องปฏิบัติการอย่างสมเหตุผล · ปีงบประมาณ 2569</p><div class="stat" id="stat">กำลังเชื่อมต่อ Google Sheet…</div> <div class="stat" id="asof">📅 ข้อมูล ณ วันที่ 27 ตุลาคม 2569</div></header>
 <nav id="nav"></nav><main id="m"></main>
-<footer>ข้อมูลจาก Google Sheet “RLU hospital Plus” (สำเนา ณ วันที่สร้างหน้านี้)</footer>
+<footer>ข้อมูลจาก Google Sheet “RLU hospital Plus” · รีเฟรชอัตโนมัติทุก 30 วินาที</footer>
 <script>
-const S1=[["พหลพลพยุหเสนา",100,5,""],["มะการักษ์",98,5,"บันไดขั้นที่ 1 ข้อ 1.1"],["สมเด็จพระสังฆราชองค์ที่ ๑๙",100,5,""],["ทองผาภูมิ",100,5,""],["บ่อพลอย",100,5,""],["ด่านมะขามเตี้ย",100,5,""],["ท่ากระดาน",95,5,"บันไดขั้นที่ 3 ข้อ 3.2"],["ศุกร์ศิริศรีสวัสดิ์",100,5,""],["สมเด็จพระปิยมหาราชรมณียเขต",95,5,"บันไดขั้นที่ 3 ข้อ 3.2"],["ไทรโยค",95,5,"บันไดขั้นที่ 3 ข้อ 3.2"],["เลาขวัญ",100,5,""],["เจ้าคุณไพบูลย์พนมทวน",95,5,"บันไดขั้นที่ 3 ข้อ 3.2"],["ห้วยกระเจาเฉลิมพระเกียรติ ๘๐ พรรษา",95,5,"บันไดขั้นที่ 3 ข้อ 3.2"],["หนองปรือ",95,5,"บันไดขั้นที่ 3 ข้อ 3.2"],["สถานพระบารมี",93,5,"บันไดขั้นที่ 1 ข้อ 1.1, บันไดขั้นที่ 3 ข้อ 3.2"],["สังขละบุรี",100,5,""]];
+let S1=[["พหลพลพยุหเสนา",100,5,""],["มะการักษ์",98,5,"บันไดขั้นที่ 1 ข้อ 1.1"],["สมเด็จพระสังฆราชองค์ที่ ๑๙",100,5,""],["ทองผาภูมิ",100,5,""],["บ่อพลอย",100,5,""],["ด่านมะขามเตี้ย",100,5,""],["ท่ากระดาน",95,5,"บันไดขั้นที่ 3 ข้อ 3.2"],["ศุกร์ศิริศรีสวัสดิ์",100,5,""],["สมเด็จพระปิยมหาราชรมณียเขต",95,5,"บันไดขั้นที่ 3 ข้อ 3.2"],["ไทรโยค",95,5,"บันไดขั้นที่ 3 ข้อ 3.2"],["เลาขวัญ",100,5,""],["เจ้าคุณไพบูลย์พนมทวน",95,5,"บันไดขั้นที่ 3 ข้อ 3.2"],["ห้วยกระเจาเฉลิมพระเกียรติ ๘๐ พรรษา",95,5,"บันไดขั้นที่ 3 ข้อ 3.2"],["หนองปรือ",95,5,"บันไดขั้นที่ 3 ข้อ 3.2"],["สถานพระบารมี",93,5,"บันไดขั้นที่ 1 ข้อ 1.1, บันไดขั้นที่ 3 ข้อ 3.2"],["สังขละบุรี",100,5,""]];
 const LV={5:"ดีเยี่ยม (Excellent)",4:"ดี (Good)",3:"พอใช้ (Fair)",2:"ต้องพัฒนา (Developing)",1:"ต้องเร่งแก้ไข (Critical)"};
 const I2=["1. ผู้ป่วยเบาหวานตรวจ HbA1c ซ้ำภายใน 90 วัน","2. ผู้ป่วยเบาหวานตรวจ LDL-C ซ้ำภายใน 90 วัน","3. ผู้รับบริการตรวจ Total Cholesterol ซ้ำภายใน 90 วัน","4. ผู้รับบริการตรวจ Triglycerides ซ้ำภายใน 90 วัน"];
 const I3=["1. ผู้ป่วยเบาหวานตรวจ HbA1c อย่างน้อยปีละ 1 ครั้ง","2. ผู้ป่วยเบาหวานตรวจ LDL-C อย่างน้อยปีละ 1 ครั้ง","3. ผู้ป่วยเบาหวานตรวจ Creatinine อย่างน้อยปีละ 1 ครั้ง"];
-const D2=[["พหลพลพยุหเสนา",10.23,10.17,1.67,2.89,6.69,11.09,12.83,1.97,2.78,8.26,11.13,10.88,2.48,2.92,7.42,11.14,10.89,2.53,2.87,7.37],
+let D2=[["พหลพลพยุหเสนา",10.23,10.17,1.67,2.89,6.69,11.09,12.83,1.97,2.78,8.26,11.13,10.88,2.48,2.92,7.42,11.14,10.89,2.53,2.87,7.37],
 ["มะการักษ์",8.59,9.21,6.31,7.52,8.04,3.89,9.29,5.16,4.88,5.2,4.37,7.01,5.04,4.68,5.07,4.22,6.57,5.32,4.75,5.02],
 ["ไทรโยค",3.84,3.64,3.39,2.98,3.55,3.99,2.53,3.19,1.54,3.3,3.09,3.14,2.35,3.76,3.09,10.77,1.82,1.32,3.66,3.85],
 ["สมเด็จพระปิยมหาราชรมณียเขต",0,0,0,7.69,1.65,0,0,0,0,0,2.37,3.25,3.8,0,2.3,2.38,4.07,5,0,2.71],
@@ -60,7 +61,7 @@ const D2=[["พหลพลพยุหเสนา",10.23,10.17,1.67,2.89,6.69,
 ["ห้วยกระเจาเฉลิมพระเกียรติ ๘๐ พรรษา",8.25,6.76,2.76,12.28,7.38,4.55,14.44,5.13,5.77,5.63,3.2,5.53,3.94,4.17,3.71,3.2,5.53,3.94,4.17,3.71],
 ["หนองปรือ",1.28,2.42,0,1.71,1.66,3.42,6.9,4.59,3.48,4.67,5.75,7.88,5.81,5.49,6.24,5.75,7.88,5.81,5.49,6.24],
 ["รวมจังหวัด",8.98,7.69,5.55,6.87,7.51,6.43,8.05,4.43,5.41,6.36,6.93,7.51,4.39,4.82,6.17,7,7.52,4.46,4.85,6.21]];
-const D3=[["พหลพลพยุหเสนา",34.69,18.44,6.07,5,64.2,34.48,19.6,6.67,5.52,66.28,45.14,18.71,5.28,5.03,74.15],
+let D3=[["พหลพลพยุหเสนา",34.69,18.44,6.07,5,64.2,34.48,19.6,6.67,5.52,66.28,45.14,18.71,5.28,5.03,74.15],
 ["มะการักษ์",47.25,15.6,6.18,3.35,72.38,47.77,13.22,6.19,4.17,71.35,56.02,15.58,5.9,3.66,81.16],
 ["ไทรโยค",28.89,11.77,5.97,4.19,50.81,26.27,11.62,6.17,3.92,47.99,34.48,13.4,6.33,5.39,59.6],
 ["สมเด็จพระปิยมหาราชรมณียเขต",35.74,10.04,9.51,9.15,64.44,41.73,10.39,6.51,7.04,65.67,55.11,12.5,6.51,7.04,81.16],
@@ -111,6 +112,37 @@ const fn=`rlu-${s==2?'hospital':'cup'}.csv`,data="\ufeff"+l.join("\r\n");try{if(
 function draw(){$('#nav').innerHTML=[["ภาพรวมจังหวัด"],["ตัวชี้วัดรายโรงพยาบาล"],["ตัวชี้วัดราย CUP"]].map((t,i)=>`<button class="${tab===i+1?'on':''}" data-t="${i+1}">${t}</button>`).join('');
 document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{tab=+b.dataset.t;draw()});
 $('#m').innerHTML=tab===1?ov():dt(tab+0);if(tab>1)bind(tab)}
-draw();
+// ===== การเชื่อมต่อ Google Sheet =====
+const SHEET_ID='1iOY8_owKvwSMXwalbiuXbnSLGx4txWzwzgp66kM_9aY';
+const SHEET_NAME='ตัวชี้วัดหลัก';   // ชื่อแท็บที่เก็บข้อมูล 3 ส่วน
+const CSV_URL='';                  // (ถ้ามี) วางลิงก์ "เผยแพร่ไปยังเว็บ" แบบ CSV ตรงนี้ จะเสถียรที่สุด
+const REFRESH_MS=30000;            // รีเฟรชทุก 30 วินาที
+LV[0]='ไม่ระบุ';
+function csv(t){const R=[];let r=[],c='',q=false;for(let i=0;i<t.length;i++){const h=t[i];if(q){if(h=='"'){if(t[i+1]=='"'){c+='"';i++}else q=false}else c+=h}else if(h=='"')q=true;else if(h==','){r.push(c);c=''}else if(h=='\n'){r.push(c);R.push(r);r=[];c=''}else if(h!='\r')c+=h}r.push(c);R.push(r);return R}
+const num=x=>/^-?\d+(\.\d+)?%?$/.test(x)?parseFloat(x):null;
+const nm=n=>n.replace(/^\s*\d+\.\s*/,'').replace(/^CUP\s*:\s*/i,'').replace(/^โรงพยาบาล(พยาบาล)?/,'').replace(/\s+/g,' ').trim();
+const lvOf=t=>/ดีเยี่ยม/.test(t)?5:/^ดี/.test(t)?4:/พอใช้/.test(t)?3:/ต้องพัฒนา/.test(t)?2:/เร่งแก้ไข/.test(t)?1:0;
+function parse(R){let sec=1,d='';const a=[],b=[],c=[];
+for(const row of R){const x=row.map(z=>z.trim()),n=x[0]||'';
+const m=x.find(z=>/ข้อมูล\s*ณ\s*วันที่/.test(z));if(m&&!d){d=m;if(!/\d/.test(m)){const nx=x.slice(x.indexOf(m)+1).find(z=>z);if(nx)d+=' '+nx}}
+if(/^ส่วนที่\s*2/.test(n))sec=2;else if(/^ส่วนที่\s*3/.test(n))sec=3;
+const isH=/^\d+\.\s*(CUP\s*:\s*)?โรงพยาบาล/.test(n),isT=/^รวม/.test(n);if(!isH&&!isT)continue;
+if(sec==1){if(!isH)continue;const sc=num(x[2]);if(sc===null)continue;const g=x[4]||'';a.push([nm(n),sc,lvOf(x[3]),/^(ไม่)?ผ่านเกณฑ์$/.test(g)||num(g)!==null?'':g]);continue}
+const v=x.slice(1).map(num).filter(z=>z!==null),name=isT?'รวมจังหวัด':nm(n);
+if(sec==2&&v.length==20)b.push([name,...v]);if(sec==3&&v.length==15)c.push([name,...v])}
+return{d,a:a.length>=16?a:[],b:b.length>=17?b:[],c:c.length>=17?c:[]}}
+function stat(m){$('#stat').textContent=m}
+async function load(){const base=CSV_URL||`https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&headers=0&sheet=${encodeURIComponent(SHEET_NAME)}`;
+try{const r=await fetch(base+(base.includes('?')?'&':'?')+'_='+Date.now(),{cache:'no-store'});if(!r.ok)throw 0;
+const p=parse(csv(await r.text()));if(!p.a.length&&!p.b.length&&!p.c.length)throw 0;
+const sig=JSON.stringify([S1,D2,D3]);
+if(p.a.length)S1=p.a;if(p.b.length){D2=p.b;CFG[2].d=D2}if(p.c.length){D3=p.c;CFG[3].d=D3}
+for(const k of [2,3])if(st[k].u&&!CFG[k].d.some(z=>z[0]===st[k].u))st[k].u='';
+const all=p.a.length&&p.b.length&&p.c.length,t=new Date().toLocaleTimeString('th-TH');
+stat((all?'🟢 เชื่อมต่อ Google Sheet แล้ว':'🟡 อ่านข้อมูลได้บางส่วน ตรวจรูปแบบ Sheet')+' · อัปเดตล่าสุด '+t);
+if(p.d)$('#asof').textContent='📅 '+p.d;
+if(sig!==JSON.stringify([S1,D2,D3]))draw()}
+catch(e){stat('🟠 เชื่อม Google Sheet ไม่ได้ ใช้ข้อมูลสำรอง · ลองใหม่อัตโนมัติ')}}
+draw();load();setInterval(load,REFRESH_MS);
 try{window.claude&&claude.use("downloads").then(d=>{dl=d;if(tab>1)draw()}).catch(()=>{})}catch(e){}
 </script></body></html>
